@@ -1,7 +1,6 @@
 class CartelAcoso extends HTMLElement {
   constructor() {
     super();
-    // Shadow DOM encapsula todo el CSS del componente
     this.attachShadow({ mode: "open" });
   }
 
@@ -12,11 +11,6 @@ class CartelAcoso extends HTMLElement {
   render() {
     this.shadowRoot.setHTMLUnsafe(/* html */`
       <style>
-        /*
-          CSS vars disponibles para customizar desde fuera:
-            cartel-acoso { --color-fondo: #a06010; }
-          Los vars CSS sí atraviesan el Shadow DOM.
-        */
         :host {
           display: flex;
           flex-direction: column;
@@ -27,9 +21,9 @@ class CartelAcoso extends HTMLElement {
           box-shadow: 0 8px 28px rgba(0,0,0,0.45);
           animation: fadeUp 0.6s 0.1s ease both;
           opacity: 0;
+          font-family: Arial, sans-serif;
         }
 
-        /* part="top" → estilable desde fuera */
         .top {
           display: flex;
           flex-direction: column;
@@ -37,7 +31,7 @@ class CartelAcoso extends HTMLElement {
           padding: 18px 16px 10px;
         }
 
-        /* part="badges" → estilable desde fuera */
+        /* ── Badges internos (no slots) ── */
         .badges {
           display: flex;
           flex-direction: column;
@@ -51,10 +45,7 @@ class CartelAcoso extends HTMLElement {
           gap: 4px;
         }
 
-        /* ::slotted() da estilo a elementos pasados vía slot */
-        ::slotted([slot="titulo-linea1"]),
-        ::slotted([slot="titulo-linea2"]) {
-          display: inline-block;
+        .badge {
           font-weight: 900;
           font-size: 1.25rem;
           text-transform: uppercase;
@@ -62,29 +53,23 @@ class CartelAcoso extends HTMLElement {
           border-radius: 4px;
           color: white;
           letter-spacing: 0.02em;
-          background: var(--color-badge-1, #00bcd4);
           opacity: 0;
           animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
         }
 
-        ::slotted([slot="titulo-linea1"]) { animation-delay: 0.4s; }
-        ::slotted([slot="titulo-linea2"]) {
-          background: var(--color-badge-2, #00bcd4);
-          animation-delay: 0.7s;
+        .badge-1 {
+          background: var(--color-badge-1, #00bcd4);
+          animation-delay: 0.4s;
         }
 
-        .badge-te {
-          display: inline-block;
-          font-weight: 900;
-          font-size: 1.25rem;
-          text-transform: uppercase;
-          padding: 3px 9px;
-          border-radius: 4px;
-          color: white;
-          letter-spacing: 0.02em;
+        .badge-morado {
           background: var(--color-badge-morado, #7c3aed);
-          opacity: 0;
-          animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) 0.55s forwards;
+          animation-delay: 0.55s;
+        }
+
+        .badge-2 {
+          background: var(--color-badge-2, #00bcd4);
+          animation-delay: 0.7s;
         }
 
         .excl {
@@ -97,18 +82,19 @@ class CartelAcoso extends HTMLElement {
         .excl-izq { color: var(--color-excl-izq, #00bcd4); animation-delay: 0.35s; }
         .excl-der { color: var(--color-excl-der, #f59e0b); animation-delay: 0.75s; }
 
-        /* ::slotted para subtitulo y tagline */
-        ::slotted([slot="subtitulo"]) {
-          display: block;
-          color: white;
-          font-size: 0.95rem;
-          font-weight: 600;
+        /* ── Slots: subtitulo y tagline ── */
+        .subtitulo-wrap {
           text-align: center;
           opacity: 0;
           animation: fadeUp 0.4s 0.85s ease forwards;
         }
 
-        /* part="tagline" → también estilable desde fuera */
+        ::slotted([slot="subtitulo"]) {
+          color: white;
+          font-size: 0.95rem;
+          font-weight: 600;
+        }
+
         .tagline-wrap {
           text-align: center;
           opacity: 0;
@@ -119,10 +105,9 @@ class CartelAcoso extends HTMLElement {
           color: white;
           font-size: 1.3rem;
           font-weight: 900;
-          text-align: center;
         }
 
-        /* part="personas" → estilable desde fuera */
+        /* ── Personas ── */
         .personas {
           width: 100%;
           height: 210px;
@@ -140,7 +125,7 @@ class CartelAcoso extends HTMLElement {
           display: block;
         }
 
-        /* part="footer" → estilable desde fuera */
+        /* ── Footer ── */
         .footer {
           display: flex;
           align-items: center;
@@ -204,39 +189,32 @@ class CartelAcoso extends HTMLElement {
         }
       </style>
 
-      <!-- part="top" permite cartel-acoso::part(top) desde fuera -->
       <div class="top" part="top">
-
-        <!-- part="badges" -->
         <div class="badges" part="badges">
           <div class="fila-badge">
             <span class="excl excl-izq">¡</span>
-            <!-- slot="titulo-linea1": el texto viene del Light DOM -->
-            <slot name="titulo-linea1"></slot>
+            <span class="badge badge-1">LA SEDE</span>
           </div>
           <div class="fila-badge">
-            <span class="badge-te">TE</span>
-            <slot name="titulo-linea2"></slot>
+            <span class="badge badge-morado">TE</span>
+            <span class="badge badge-2">ACOMPAÑA</span>
             <span class="excl excl-der">!</span>
           </div>
         </div>
 
-        <!-- slot="subtitulo": texto personalizable desde fuera -->
-        <slot name="subtitulo"></slot>
-
-        <!-- part="tagline" + slot="tagline" -->
-        <div class="tagline-wrap" part="tagline">
-          <slot name="tagline"></slot>
+        <div class="subtitulo-wrap">
+          <slot name="subtitulo">El respeto no se negocia</slot>
         </div>
 
+        <div class="tagline-wrap" part="tagline">
+          <slot name="tagline">¡Pará ya de acosar!</slot>
+        </div>
       </div>
 
-      <!-- part="personas" -->
       <div class="personas" part="personas">
         <img src="personas.png" alt="Personas">
       </div>
 
-      <!-- part="footer" -->
       <div class="footer" part="footer">
         <img src="logo-ucr.png" alt="UCR">
         <span class="sep"></span>

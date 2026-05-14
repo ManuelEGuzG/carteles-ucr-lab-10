@@ -9,16 +9,11 @@ const items = [
 class CartelDirectorio extends HTMLElement {
   constructor() {
     super();
-    // Shadow DOM: el CSS interno NO se filtra hacia fuera ni hacia adentro
     this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
     this.render();
-  }
-
-  get #titulo() {
-    return this.getAttribute("titulo") ?? "Directorio";
   }
 
   get #filas() {
@@ -33,11 +28,6 @@ class CartelDirectorio extends HTMLElement {
   render() {
     this.shadowRoot.setHTMLUnsafe(/* html */`
       <style>
-        /*
-          CSS vars con fallback — se pueden sobreescribir desde fuera:
-            cartel-directorio { --color-fondo: #0d1f4e; }
-          Las CSS vars SÍ atraviesan el Shadow DOM.
-        */
         :host {
           display: block;
           width: 340px;
@@ -80,7 +70,6 @@ class CartelDirectorio extends HTMLElement {
 
         .fila:hover .flecha { transform: translateX(5px); }
 
-        /* CSS part="footer" → estilable desde fuera con ::part(footer) */
         .footer {
           background: var(--color-footer-bg, linear-gradient(to right, #b0bac8, #d4dce8, #b0bac8));
           display: flex;
@@ -110,8 +99,6 @@ class CartelDirectorio extends HTMLElement {
       <div class="filas" part="filas">
         ${this.#filas}
       </div>
-
-      <!-- part="footer" permite estilarlo desde fuera con cartel-directorio::part(footer) -->
       <div class="footer" part="footer">
         <img src="logo-ucr.png" alt="Logo UCR">
       </div>
