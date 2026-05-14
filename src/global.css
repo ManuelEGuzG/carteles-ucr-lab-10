@@ -17,3 +17,23 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* ── Ejemplo de customización desde fuera via CSS vars y ::part() ── */
+
+/* cartel-directorio {
+  --color-fondo: #0d1f4e;
+  --color-borde: rgba(255,255,255,0.1);
+}
+
+cartel-directorio::part(footer) {
+  background: linear-gradient(to right, #8a9ab0, #c0cad8, #8a9ab0);
+}
+
+cartel-acoso {
+  --color-fondo: #a06010;
+  --color-badge-1: #0097a7;
+}
+
+cartel-acoso::part(tagline) {
+  font-size: 1.5rem;
+} */

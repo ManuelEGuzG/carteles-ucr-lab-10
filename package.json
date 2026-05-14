@@ -1,18 +1,17 @@
 {
-  "name": "carteles-ucr-lab-9",
+  "name": "carteles-ucr-lab-10",
   "version": "1.0.0",
-  "description": "web component",
-  "main": "index.js",
+  "description": "Carteles UCR con Shadow DOM, Slots, CSS Custom Properties y CSS Parts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpx vite --root src/ --port 1234",
-    "deploy": "gh-pages -d src/ --no-history"
+    "dev": "vite src",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "pnpm build && gh-pages -d dist"
   },
-  "keywords": [],
-  "author": "Manuel",
+  "keywords": ["web-components", "shadow-dom", "slots", "css-parts"],
+  "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.32.1",
-  "type": "module",
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "vite": "^8.0.12"
