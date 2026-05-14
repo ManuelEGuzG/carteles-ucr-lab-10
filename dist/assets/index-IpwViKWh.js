@@ -1,10 +1,5 @@
-var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a,s)=>(f(t,a,"read from private field"),s?s.call(t):a.get(t)),d=(t,a,s)=>a.has(t)?l("Cannot add the same private member more than once"):a instanceof WeakSet?a.add(t):a.set(t,s);(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const o of e)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&i(n)}).observe(document,{childList:!0,subtree:!0});function s(e){const o={};return e.integrity&&(o.integrity=e.integrity),e.referrerPolicy&&(o.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?o.credentials="include":e.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function i(e){if(e.ep)return;e.ep=!0;const o=s(e);fetch(e.href,o)}})();const g=["Aulas 5, 6, 7","Apoyo Informático","Servidores","Laboratorio 1 y 2","Coordinación<br>Informática Empresarial"];var r,u,p;class m extends HTMLElement{constructor(){super();d(this,r);this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){this.shadowRoot.setHTMLUnsafe(`
+var l=a=>{throw TypeError(a)};var f=(a,t,s)=>t.has(a)||l("Cannot "+s);var c=(a,t,s)=>(f(a,t,"read from private field"),s?s.call(a):t.get(a)),d=(a,t,s)=>t.has(a)?l("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(a):t.set(a,s);(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))r(e);new MutationObserver(e=>{for(const o of e)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&r(n)}).observe(document,{childList:!0,subtree:!0});function s(e){const o={};return e.integrity&&(o.integrity=e.integrity),e.referrerPolicy&&(o.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?o.credentials="include":e.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function r(e){if(e.ep)return;e.ep=!0;const o=s(e);fetch(e.href,o)}})();const g=["Aulas 5, 6, 7","Apoyo Informático","Servidores","Laboratorio 1 y 2","Coordinación<br>Informática Empresarial"];var i,p;class m extends HTMLElement{constructor(){super();d(this,i);this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){this.shadowRoot.setHTMLUnsafe(`
       <style>
-        /*
-          CSS vars con fallback — se pueden sobreescribir desde fuera:
-            cartel-directorio { --color-fondo: #0d1f4e; }
-          Las CSS vars SÍ atraviesan el Shadow DOM.
-        */
         :host {
           display: block;
           width: 340px;
@@ -47,7 +42,6 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
 
         .fila:hover .flecha { transform: translateX(5px); }
 
-        /* CSS part="footer" → estilable desde fuera con ::part(footer) */
         .footer {
           background: var(--color-footer-bg, linear-gradient(to right, #b0bac8, #d4dce8, #b0bac8));
           display: flex;
@@ -75,25 +69,18 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
       </style>
 
       <div class="filas" part="filas">
-        ${c(this,r,p)}
+        ${c(this,i,p)}
       </div>
-
-      <!-- part="footer" permite estilarlo desde fuera con cartel-directorio::part(footer) -->
       <div class="footer" part="footer">
         <img src="logo-ucr.png" alt="Logo UCR">
       </div>
-    `)}}r=new WeakSet,u=function(){return this.getAttribute("titulo")??"Directorio"},p=function(){return g.map((s,i)=>`
-      <div class="fila" style="animation-delay: ${.2+i*.15}s" part="fila">
+    `)}}i=new WeakSet,p=function(){return g.map((s,r)=>`
+      <div class="fila" style="animation-delay: ${.2+r*.15}s" part="fila">
         <span>${s}</span>
         <span class="flecha">→</span>
       </div>
     `).join("")};customElements.define("cartel-directorio",m);class b extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){this.render()}render(){this.shadowRoot.setHTMLUnsafe(`
       <style>
-        /*
-          CSS vars disponibles para customizar desde fuera:
-            cartel-acoso { --color-fondo: #a06010; }
-          Los vars CSS sí atraviesan el Shadow DOM.
-        */
         :host {
           display: flex;
           flex-direction: column;
@@ -104,9 +91,9 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
           box-shadow: 0 8px 28px rgba(0,0,0,0.45);
           animation: fadeUp 0.6s 0.1s ease both;
           opacity: 0;
+          font-family: Arial, sans-serif;
         }
 
-        /* part="top" → estilable desde fuera */
         .top {
           display: flex;
           flex-direction: column;
@@ -114,7 +101,7 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
           padding: 18px 16px 10px;
         }
 
-        /* part="badges" → estilable desde fuera */
+        /* ── Badges internos (no slots) ── */
         .badges {
           display: flex;
           flex-direction: column;
@@ -128,10 +115,7 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
           gap: 4px;
         }
 
-        /* ::slotted() da estilo a elementos pasados vía slot */
-        ::slotted([slot="titulo-linea1"]),
-        ::slotted([slot="titulo-linea2"]) {
-          display: inline-block;
+        .badge {
           font-weight: 900;
           font-size: 1.25rem;
           text-transform: uppercase;
@@ -139,29 +123,23 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
           border-radius: 4px;
           color: white;
           letter-spacing: 0.02em;
-          background: var(--color-badge-1, #00bcd4);
           opacity: 0;
           animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
         }
 
-        ::slotted([slot="titulo-linea1"]) { animation-delay: 0.4s; }
-        ::slotted([slot="titulo-linea2"]) {
-          background: var(--color-badge-2, #00bcd4);
-          animation-delay: 0.7s;
+        .badge-1 {
+          background: var(--color-badge-1, #00bcd4);
+          animation-delay: 0.4s;
         }
 
-        .badge-te {
-          display: inline-block;
-          font-weight: 900;
-          font-size: 1.25rem;
-          text-transform: uppercase;
-          padding: 3px 9px;
-          border-radius: 4px;
-          color: white;
-          letter-spacing: 0.02em;
+        .badge-morado {
           background: var(--color-badge-morado, #7c3aed);
-          opacity: 0;
-          animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) 0.55s forwards;
+          animation-delay: 0.55s;
+        }
+
+        .badge-2 {
+          background: var(--color-badge-2, #00bcd4);
+          animation-delay: 0.7s;
         }
 
         .excl {
@@ -174,18 +152,19 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
         .excl-izq { color: var(--color-excl-izq, #00bcd4); animation-delay: 0.35s; }
         .excl-der { color: var(--color-excl-der, #f59e0b); animation-delay: 0.75s; }
 
-        /* ::slotted para subtitulo y tagline */
-        ::slotted([slot="subtitulo"]) {
-          display: block;
-          color: white;
-          font-size: 0.95rem;
-          font-weight: 600;
+        /* ── Slots: subtitulo y tagline ── */
+        .subtitulo-wrap {
           text-align: center;
           opacity: 0;
           animation: fadeUp 0.4s 0.85s ease forwards;
         }
 
-        /* part="tagline" → también estilable desde fuera */
+        ::slotted([slot="subtitulo"]) {
+          color: white;
+          font-size: 0.95rem;
+          font-weight: 600;
+        }
+
         .tagline-wrap {
           text-align: center;
           opacity: 0;
@@ -196,10 +175,9 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
           color: white;
           font-size: 1.3rem;
           font-weight: 900;
-          text-align: center;
         }
 
-        /* part="personas" → estilable desde fuera */
+        /* ── Personas ── */
         .personas {
           width: 100%;
           height: 210px;
@@ -217,7 +195,7 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
           display: block;
         }
 
-        /* part="footer" → estilable desde fuera */
+        /* ── Footer ── */
         .footer {
           display: flex;
           align-items: center;
@@ -281,39 +259,32 @@ var l=t=>{throw TypeError(t)};var f=(t,a,s)=>a.has(t)||l("Cannot "+s);var c=(t,a
         }
       </style>
 
-      <!-- part="top" permite cartel-acoso::part(top) desde fuera -->
       <div class="top" part="top">
-
-        <!-- part="badges" -->
         <div class="badges" part="badges">
           <div class="fila-badge">
             <span class="excl excl-izq">¡</span>
-            <!-- slot="titulo-linea1": el texto viene del Light DOM -->
-            <slot name="titulo-linea1"></slot>
+            <span class="badge badge-1">LA SEDE</span>
           </div>
           <div class="fila-badge">
-            <span class="badge-te">TE</span>
-            <slot name="titulo-linea2"></slot>
+            <span class="badge badge-morado">TE</span>
+            <span class="badge badge-2">ACOMPAÑA</span>
             <span class="excl excl-der">!</span>
           </div>
         </div>
 
-        <!-- slot="subtitulo": texto personalizable desde fuera -->
-        <slot name="subtitulo"></slot>
-
-        <!-- part="tagline" + slot="tagline" -->
-        <div class="tagline-wrap" part="tagline">
-          <slot name="tagline"></slot>
+        <div class="subtitulo-wrap">
+          <slot name="subtitulo">El respeto no se negocia</slot>
         </div>
 
+        <div class="tagline-wrap" part="tagline">
+          <slot name="tagline">¡Pará ya de acosar!</slot>
+        </div>
       </div>
 
-      <!-- part="personas" -->
       <div class="personas" part="personas">
         <img src="personas.png" alt="Personas">
       </div>
 
-      <!-- part="footer" -->
       <div class="footer" part="footer">
         <img src="logo-ucr.png" alt="UCR">
         <span class="sep"></span>
