@@ -76,10 +76,3 @@ cartel-acoso::part(footer) {
 
 ---
 
-## Comandos
-
-```bash
-pnpm install       # instalar dependencias
-pnpm run dev       # servidor local
-pnpm run deploy    # build + publicar en gh-pages
-```
